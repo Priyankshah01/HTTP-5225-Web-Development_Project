@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\StudentController;
 
 // Redirect home to users list
 Route::get('/', function () {
@@ -9,4 +9,4 @@ Route::get('/', function () {
 });
 
 // User CRUD routes
-Route::resource('users', UserController::class); 
+Route::resource('students', StudentController::class);

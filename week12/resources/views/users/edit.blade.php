@@ -1,76 +1,33 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit User</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .form-group {
-            margin: 15px 0;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="text"], input[type="email"], input[type="password"] {
-            width: 300px;
-            padding: 8px;
-            border: 1px solid #ddd;
-        }
-        .btn {
-            padding: 8px 15px;
-            margin: 5px;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-success { background: #28a745; color: white; }
-        .btn-secondary { background: #6c757d; color: white; }
-        .error {
-            color: red;
-            font-size: 14px;
-        }
-        .note {
-            font-size: 12px;
-            color: #666;
-        }
-    </style>
-</head>
-<body>
-    <h1>Edit User</h1>
+@extends('layouts.app')
 
-    <form method="POST" action="{{ route('users.update', $user->id) }}">
+@section('content')
+<div class="form-wrapper">
+    <h2>Edit Student Details</h2>
+
+    @if ($errors->any())
+        <div class="error-box">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('students.update', $student->id) }}" method="POST">
         @csrf
         @method('PUT')
-        
-        <div class="form-group">
-            <label>Name:</label>
-            <input type="text" name="name" value="{{ old('name', $user->name) }}" required>
-            @error('name')
-                <div class="error">{{ $message }}</div>
-            @enderror
-        </div>
 
-        <div class="form-group">
-            <label>Email:</label>
-            <input type="email" name="email" value="{{ old('email', $user->email) }}" required>
-            @error('email')
-                <div class="error">{{ $message }}</div>
-            @enderror
-        </div>
+        <label>Full Name:</label>
+        <input type="text" name="full_name" value="{{ old('full_name', $student->full_name) }}" required>
 
-        <div class="form-group">
-            <label>Password:</label>
-            <input type="password" name="password" placeholder="Leave blank to keep current">
-            <div class="note">Leave blank if you don't want to change password</div>
-            @error('password')
-                <div class="error">{{ $message }}</div>
-            @enderror
-        </div>
+        <label>Email:</label>
+        <input type="email" name="email" value="{{ old('email', $student->email) }}" required>
 
-        <button type="submit" class="btn btn-success">Update User</button>
-        <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancel</a>
+        <label>Program:</label>
+        <input type="text" name="program" value="{{ old('program', $student->program) }}" required>
+
+        <button type="submit">Update</button>
     </form>
-</body>
-</html> 
+</div>
+@endsection
