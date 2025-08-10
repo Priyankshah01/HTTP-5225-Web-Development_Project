@@ -3,19 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Student extends Authenticatable
+class Student extends Model
 {
+    /** @use HasFactory<\Database\Factories\StudentFactory> */
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'fname',
+        'lname',
         'email',
-        'password',
-    ];
-
-    protected $hidden = [
-        'password',
     ];
 }
