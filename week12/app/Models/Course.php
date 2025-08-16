@@ -9,9 +9,19 @@ class Course extends Model
 {
     use HasFactory;
 
-    // Allow mass assignment for these columns
     protected $fillable = [
         'name',
         'description',
+        'professor_id'
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function professor()
+    {
+        return $this->belongsTo(Professor::class);
+    }
 }
